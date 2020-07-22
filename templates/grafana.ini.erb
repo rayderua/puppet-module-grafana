@@ -1,0 +1,30 @@
+### THIS FILE MANAGED BY PUPPET, DO NO EDIT!
+<% @config.map do |k,v| -%>
+<%   if v.is_a?(Hash) -%>
+
+[<%=   k %>]
+<%     v.map do |ki, vi| -%>
+<%       if vi == true  -%>
+<%=        ki %> = true
+<%       elsif vi == '' -%>
+<%=        ki %> =
+<%       elsif vi.is_a?(Array) -%>
+<%         vi.each do |vii| -%>
+<%=          ki %> = <%= vii %>
+<%         end -%>
+<%       elsif ![nil, '', :undef].include?(vi) -%>
+<%=        ki %> = <%= vi %>
+<%       end -%>
+<%     end -%>
+<%   elsif v == true -%>
+<%=  k %> = true
+<%   elsif v == '' -%>
+<%=  k %> =
+<%   elsif v.is_a?(Array) -%>
+<%     v.each do |vi| -%>
+<%=  k %> = <%= vi %>
+<%     end -%>
+<%   elsif ![nil, '', :undef].include?(v) -%>
+<%=  k %> = <%= v %>
+<%   end -%>
+<% end %>
